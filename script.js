@@ -18,28 +18,98 @@ const barbearia = {
 };
   
   
+const todoCortes = barbearia.cortes
 function buscaCortePorId(id) {
+    let corteEncontrado = "Corte não encontrado"
+    for (let i = 0; i < todoCortes.length; i++) {
+        if (id === todoCortes[i].id) {
+            corteEncontrado = todoCortes[i];
+        }
+    }
+
+    return corteEncontrado
 }
 
+console.log(buscaCortePorId(2))
+
+const todasBarbas = barbearia.barbas
 function buscaBarbaPorId(id) {
+    let barbaEncontrada = "Barba não encontrada"
+    for (let i = 0; i < todasBarbas.length; i++) {
+        if (id === todasBarbas[i].id) {
+            barbaEncontrada = todasBarbas[i];
+        }
+    }
+
+    return barbaEncontrada
 }
+
+console.log(buscaBarbaPorId(2))
+
 
 function verificaStatusBarbearia() {
+    if (barbearia.estaAberto) {
+        return "Estamos abertos"
+    } else {
+        return "Estamos fechados"
+    }
 }
+
+console.log(verificaStatusBarbearia())
+
 
 function retornaTodosCortes() {
+    return barbearia.cortes
 }
+
+console.log(retornaTodosCortes())
+
 
 function retornaTodasBarbas() {
+    return barbearia.barbas
 }
+
+console.log(retornaTodasBarbas())
+
 
 function criaPedido(nomeCliente, corteId, barbaId) {
+    let corte = buscaCortePorId(corteId)
+    let barba = buscaBarbaPorId(barbaId)
+
+    const pedido = {
+        nome: nomeCliente,
+
+        pedidoCorte: corte.tipo,
+
+        pedidoCortePreco: corte.valor,
+
+        pedidoBarba: barba.tipo,
+
+        pedidoBarbaPreco: barba.valor,
+    }
+    return pedido
 }
+console.log(criaPedido("Gabriel", 2, 2))
+
 
 function atualizarServico(lista, id, valor, tipo) {
+    for(let i = 0; i < lista.length; i++){
+        if(lista[i].id === id){
+            lista[i].valor = valor
+            lista[i].tipo = tipo
+        }
+    }
+    return lista
 }
 
+
+
 function calculaTotal(pedido) {
+    let soma = criaPedido(pedido)
+    soma = pedido.pedidoBarbaPreco + pedido.pedidoCortePreco
+    return soma
 }
-  
-  
+
+
+
+console.log(barbearia)
